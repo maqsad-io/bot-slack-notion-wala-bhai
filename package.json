@@ -40,8 +40,13 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "@nestjs/common": "^9.0.5",
+    "@nestjs/config": "^2.2.0",
     "@notionhq/client": "^2.1.0",
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "nest": "^0.1.6",
+    "nestjs": "^0.0.1"
   },
   "main": "lib/index.js",
   "license": "Apache-2.0",

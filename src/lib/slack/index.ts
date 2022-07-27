@@ -8,14 +8,14 @@ export interface SlackManagerProps{
 }
 export class SlackManager {
 
-  private readonly channelURL:string;
+  private readonly channelURL: string;
 
-  constructor(props:SlackManagerProps) {
+  constructor(props: SlackManagerProps) {
     this.channelURL = props.channelURL;
   }
 
 
-  async sendMessage(props:{message:string; imageUrl:string}) : Promise<any> {
+  async sendMessage(props: { imageUrl: string; message: string }) : Promise<any> {
     let config:AxiosRequestConfig = {
       method: 'post',
       url: this.channelURL,

@@ -46,14 +46,14 @@ export class StandUpManager {
 
 
   private async getTodaysBlock(blockID:string) {
-    const notionBlocks = await this.notionManager.getChildBlocks(blockID, 6);
+    const notionBlocks = await this.notionManager.getChildBlocks(blockID);
     const toggleBlocks = StandUpManager.getToggleBlocks(notionBlocks);
     const todayToggleBlock = toggleBlocks.filter(block => StandUpManager.isTodaysBlock(block));
     return todayToggleBlock?.[0];
   }
 
 
-  async checkFillStatus(blockID:string):Promise<{name:string;didFill:boolean}[]> {
+  async checkFillStatus(blockID: string):Promise<{ name: string; didFill: boolean }[]> {
     const standUpBlock = await this.getTodaysBlock(blockID);
     const results = await this.notionManager.getChildBlocks(standUpBlock.id);
     const peopleList = StandUpManager.getBulletedBlocks(results);

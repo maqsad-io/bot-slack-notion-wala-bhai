@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { AxiosPromise } from 'axios';
-import { goodPeepsMessage, badPeepsStartMessage, badPeepsEndMessage } from '../constants';
+import { goodPeepsStartMessage, goodPeepsEndMessage, badPeepsStartMessage, badPeepsEndMessage } from '../constants';
 import { NotionManager } from '../notion';
 import { SlackManager } from '../slack';
 import { StandUpManager } from '../stand-up-manager';
@@ -55,12 +55,12 @@ export class Bot {
       throw new Error('No one filled the standup document!'); // rejects the promise
     }
 
-    let message = goodPeepsMessage;
+    let message = goodPeepsStartMessage;
     goodJobPeeps.forEach(peep => {
       message += `<@${this.getSlackID(peep)}>, `;
     });
     message = message.slice(0, message.length - 2);
-    message.concat(' 👍');
+    message += `${goodPeepsEndMessage}`;
 
     return this.slack.sendMessage({ message: message, imageUrl: this.goodPeepsImageUrl });
   }
@@ -76,7 +76,7 @@ export class Bot {
       message += `<@${this.getSlackID(peep)}>, `;
     });
     message = message.slice(0, message.length - 2);
-    message.concat(badPeepsEndMessage);
+    message += `${badPeepsEndMessage}`;
 
     return this.slack.sendMessage({ message: message, imageUrl: this.badPeepsImageUrl });
   }
